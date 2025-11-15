@@ -5,7 +5,7 @@
 # Altoigh previous commands actually reproduce the results we obtain on PTB-XL All, we consider this dataset only as an example
 # More useful information available with:   python finetune.py --help
 
-python finetune.py 3 /kaggle/working/HuBERT-ECG/reproducibility/ptbxl/ptbxl_all_train.csv /kaggle/working/HuBERT-ECG/reproducibility/ptbxl/ptb_all_val.csv 71 8 64 auroc \
+python finetune.py 3 /kaggle/working/HuBERT-ECG/reproducibility/ptbxl/ptbxl_all_train.csv /kaggle/working/HuBERT-ECG/reproducibility/ptbxl/ptbxl_all_val.csv 71 8 64 auroc \
     --load_path=/kaggle/working/HuBERT-ECG/hubert_ecg_small.pt \
     --training_steps=70000 --downsampling_factor=5 --label_start_index=4 --use_loss_weights \
     --transformer_blocks_to_unfreeze=8 --model_dropout_mult=-2 --val_interval=500 \
