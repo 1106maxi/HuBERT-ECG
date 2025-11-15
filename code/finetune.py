@@ -54,8 +54,8 @@ def finetune(args):
     ### NOTE: comment for sweeps, uncomment for normal run ###
     #wandb.init(project="hubert-ecg", group="ptbxl_all")
 
-    if args.wandb_run_name is not None:
-        wandb.run.name = args.wandb_run_name
+    #if args.wandb_run_name is not None:
+    #    wandb.run.name = args.wandb_run_name
     
     torch.manual_seed(42)
     np.random.seed(42)
