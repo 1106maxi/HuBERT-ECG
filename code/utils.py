@@ -188,9 +188,7 @@ def multilabel_split(path_to_csv_file, test_size, val_size, fold='', random_stat
         test.to_csv(path_to_csv_file[:-4] + "_" + fold + "_test.csv", index=False)
     return train, val, test
 
-def prepare_data_ptb_xl(min_cnt=1):
-    
-    data_path = "/data/ECG_AF/"
+def prepare_data_ptb_xl(min_cnt=1, data_path = "/data/ECG_AF/"):
     
     # reading df
     ptb_xl_csv = os.path.join(data_path, "ptbxl_database.csv")
