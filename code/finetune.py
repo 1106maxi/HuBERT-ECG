@@ -28,7 +28,7 @@ from transformers import HubertConfig
 
 EPS = 1e-9
 MINIMAL_IMPROVEMENT = 1e-3
-SUPERVISED_MODEL_CKPT_PATH = "/models/checkpoints/supervised/"
+SUPERVISED_MODEL_CKPT_PATH = "/checkpoints/"
 DROPOUT_DYNAMIC_REG_FACTOR = 0.05
     
 
@@ -52,7 +52,7 @@ def finetune(args):
     device = torch.device('cuda')
     
     ### NOTE: comment for sweeps, uncomment for normal run ###
-    wandb.init(entity="my-entity", project="my-project", group="supervised")
+    #wandb.init(project="hubert-ecg", group="ptbxl_all")
 
     if args.wandb_run_name is not None:
         wandb.run.name = args.wandb_run_name
@@ -87,7 +87,7 @@ def finetune(args):
     train_dl = DataLoader(
         train_set,
         collate_fn=train_set.collate,
-        num_workers=6,
+        num_workers=2,
         batch_size=args.batch_size,
         shuffle=True,
         pin_memory=True,
@@ -97,7 +97,7 @@ def finetune(args):
     val_dl = DataLoader(
         val_set,
         collate_fn=val_set.collate,
-        num_workers=6,
+        num_workers=2,
         batch_size=args.batch_size,
         shuffle=False,
         pin_memory=True,
@@ -289,7 +289,7 @@ def finetune(args):
         config.layerdrop = args.finetuning_layerdrop
 
         pretrained_hubert = HuBERT(config)
-        hubert.hubert_ecg.load_state_dict(checkpoint['model_state_dict']) # load backbone weights
+        pretrained_hubert.hubert_ecg.load_state_dict(checkpoint['model_state_dict']) # load backbone weights
         
         # restore original p-dropout or set multipliers
         for name, module in pretrained_hubert.named_modules():
